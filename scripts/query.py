@@ -61,7 +61,7 @@ def system(slug: str) -> None:
     payload = q("SELECT payload FROM breakdowns WHERE slug=?", (slug,))
     if payload:
         doc = json.loads(payload[0][0])
-        keys = [k for k in doc.keys() if not k.startswith("$")]
+        keys = [k for k in doc if not k.startswith("$")]
         print("breakdown keys:", ", ".join(keys[:25]))
         for k in ("origin", "governance", "knownFor", "watchOuts", "evaluation",
                   "anchorComponents", "tokenSnapshot"):

@@ -4,12 +4,11 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 
 from .checks import check
 from .corpus import counts, search
 from .exporters import design_md
-from .index import score, top
+from .index import top
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -36,6 +35,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0 if res["score"] >= a.min_score else 1
     if a.cmd == "export":
         from .corpus import _connect
+
         con = _connect()
         try:
             row = con.execute("SELECT payload FROM breakdowns WHERE slug=?", (a.slug,)).fetchone()
@@ -47,8 +47,11 @@ def main(argv: list[str] | None = None) -> int:
         print(design_md(json.loads(row[0]), a.slug))
         return 0
     if a.cmd == "audit":
-        print(json.dumps({"top": top(5), "search": search(a.query, a.limit)},
-                         indent=2, ensure_ascii=False))
+        print(
+            json.dumps(
+                {"top": top(5), "search": search(a.query, a.limit)}, indent=2, ensure_ascii=False
+            )
+        )
         return 0
     return 1
 

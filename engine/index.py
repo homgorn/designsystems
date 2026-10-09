@@ -20,10 +20,12 @@ def score(slug: str) -> dict:
 
 def top(n: int = 10) -> list[tuple[str, int]]:
     from .corpus import _connect  # локально: внутренний доступ к списку систем
+
     con = _connect()
     try:
         rows = con.execute(
-            "SELECT slug, score FROM ai_ready_systems ORDER BY score DESC, slug LIMIT ?", (n,)).fetchall()
+            "SELECT slug, score FROM ai_ready_systems ORDER BY score DESC, slug LIMIT ?", (n,)
+        ).fetchall()
         return [(r[0], r[1]) for r in rows]
     finally:
         con.close()

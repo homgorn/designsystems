@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import time
 import urllib.request
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 UA = "designsystems-engine/0.1"
 TIMEOUT = 12
@@ -15,7 +15,7 @@ def _probe(url: str) -> tuple[bool, str]:
         req = urllib.request.Request(url, headers={"User-Agent": UA}, method="HEAD")
         with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
             return r.status < 400, f"HTTP {r.status}"
-    except Exception as exc:  # сеть недоступна -> EC-2: фиксируем, не падаем
+    except (OSError, ValueError) as exc:  # сеть недоступна -> EC-2: фиксируем, не падаем
         return False, f"unreachable: {exc}"
 
 
@@ -37,16 +37,31 @@ def check(url: str, repo: str | None = None) -> dict:
                 break
         else:
             ev = f"not found: {candidates[0]}"
-        checks.append({"signal": signal, "status": "yes" if ok else "no",
-                       "evidence": ev, "source_url": candidates[0]})
+        checks.append(
+            {
+                "signal": signal,
+                "status": "yes" if ok else "no",
+                "evidence": ev,
+                "source_url": candidates[0],
+            }
+        )
         confirmed += ok
     for signal in ("dtcg", "codeConnect"):
-        # без repo доказать отсутствие нельзя -> unknown (методика, FR-3)
-        st = "unknown" if not repo else "unknown"  # repo-аудит — P1-модуль
-        checks.append({"signal": signal, "status": st,
-                       "evidence": "needs repo tree read (P1 module)" if not repo else "repo audit: see P1",
-                       "source_url": None})
-    return {"url": url, "score": confirmed, "max": 5, "checks": checks,
-            "duration_ms": int((time.time() - t0) * 1000),
-            "checked_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-            "cached": False}
+        # без repo доказать отсутствие нельзя -> unknown (методика, FR-3); repo-аудит — P1-модуль
+        checks.append(
+            {
+                "signal": signal,
+                "status": "unknown",
+                "evidence": "repo audit: see P1" if repo else "needs repo tree read (P1 module)",
+                "source_url": None,
+            }
+        )
+    return {
+        "url": url,
+        "score": confirmed,
+        "max": 5,
+        "checks": checks,
+        "duration_ms": int((time.time() - t0) * 1000),
+        "checked_at": datetime.now(UTC).isoformat(timespec="seconds"),
+        "cached": False,
+    }

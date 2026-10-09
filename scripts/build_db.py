@@ -19,8 +19,6 @@ Outputs:
 from __future__ import annotations
 
 import argparse
-import csv
-import io
 import json
 import re
 import sqlite3
@@ -28,7 +26,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -275,7 +273,7 @@ def sha256(data: bytes) -> str:
 
 
 def now() -> str:
-    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+    return datetime.now(UTC).isoformat(timespec="seconds")
 
 
 def jload(data: bytes):
@@ -432,7 +430,7 @@ def main() -> int:
             try:
                 data = fetch_cached(f"breakdowns/{slug}.json", url, args.refresh)
                 doc = jload(data)
-            except Exception as exc:  # keep going; partial corpus is still useful
+            except (OSError, ValueError, RuntimeError, KeyError) as exc:  # keep going; partial corpus is still useful
                 print(f"      !! {slug}: {exc}")
                 continue
             cur.execute(
@@ -568,7 +566,7 @@ def main() -> int:
     # ---------------- 7. sitemap + monetisation ----------------
     print("[7/8] site inventory + monetisation surfaces")
     xml = (RAW / "sitemap.xml").read_text(encoding="utf-8", errors="replace")
-    for block in re.findall(r"<url>(.*?)</url>", xml, re.S):
+    for block in re.findall(r"<url>(.*?)</url>", xml, re.DOTALL):
         loc = re.search(r"<loc>(.*?)</loc>", block)
         if not loc:
             continue

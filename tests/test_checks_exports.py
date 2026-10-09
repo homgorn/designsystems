@@ -18,7 +18,9 @@ def test_ac4_design_md_has_evidence_and_attribution():
 
 
 def test_ac5_acr_conformance_empty_and_coverage():
-    d = exporters.acr_draft("P", [{"criterion": "1.1.1", "auto": True, "finding": "ok", "evidence": "e"}])
+    d = exporters.acr_draft(
+        "P", [{"criterion": "1.1.1", "auto": True, "finding": "ok", "evidence": "e"}]
+    )
     assert d["criteria"][0]["conformance"] is None
     assert d["reviewer_signoff"] is False
     assert "coverage_statement" in d
@@ -32,11 +34,13 @@ def test_ac6_tokens_loss_report():
 
 def test_ac9_cli_gate_exit_code():
     from engine.cli import main
+
     assert main(["check", "https://www.designsystems.one", "--min-score", "99"]) == 1
 
 
 def test_ac11_attribution_in_all_exports():
     from engine import exporters
+
     md = exporters.design_md({"name": "X"}, "x")
     acr = exporters.acr_draft("P", [])
     tok = exporters.tokens_emit({"tokens": {}})
@@ -48,8 +52,10 @@ def test_ac11_attribution_in_all_exports():
 
 def test_ec6_mcp_missing_extra_hint():
     import pytest
+
     try:
         import mcp  # noqa
+
         pytest.skip("mcp установлен — EC-6 не применим")
     except ImportError as exc:
         assert "pip install" in str(exc) or "No module named 'mcp'" in str(exc)
@@ -60,17 +66,20 @@ import pytest as _pt
 
 @_pt.mark.xfail(reason="Chunk A1: shadcn-адаптер — стаб, verify едет в A1 (AC-7)")
 def test_ac7_adapter_verify():
-    from adapters.shadcn import verify  # noqa
+    from adapters.shadcn import verify
+
     assert verify("button.json")["valid"]
 
 
 @_pt.mark.xfail(reason="Chunk E1-followup: MCP live-тест после установки extra (AC-8)")
 def test_ac8_mcp_search():
-    from engine.mcp_server import create_server  # noqa
+    from engine.mcp_server import create_server
+
     assert create_server() is not None
 
 
 @_pt.mark.xfail(reason="Chunk A2: figma-fallback едет в A2 (AC-10)")
 def test_ac10_figma_fallback():
-    from adapters.figma import fallback_instruction  # noqa
+    from adapters.figma import fallback_instruction
+
     assert "Tokens Studio" in fallback_instruction(None)

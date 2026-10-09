@@ -5,9 +5,15 @@ from engine.corpus import counts, signals
 
 def test_ac1_corpus_counts():
     c = counts()
-    assert (c["design_systems"], c["ai_ready_systems"], c["ai_ready_signals"],
-            c["breakdown_links"], c["glossary"], c["mcp_tools"],
-            c["site_urls"]) == (49, 37, 185, 241, 40, 23, 223)
+    assert (
+        c["design_systems"],
+        c["ai_ready_systems"],
+        c["ai_ready_signals"],
+        c["breakdown_links"],
+        c["glossary"],
+        c["mcp_tools"],
+        c["site_urls"],
+    ) == (49, 37, 185, 241, 40, 23, 223)
 
 
 def test_ac2_carbon_score_and_evidence():
