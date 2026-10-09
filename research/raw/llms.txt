@@ -1,0 +1,166 @@
+﻿# DesignSystems.one
+
+> A curated catalogue of 120 real-world design systems, the independent Agent-Ready Design Systems Index (37 systems audited against five signals), free interactive tools (token generator, accessibility checklist, ROI calculator, token diff, grid builder), and editorial breakdowns of every anchor system. Aimed at practitioners who ship — designers, engineers, and PMs.
+
+## Start here
+
+- [What is a design system?](https://www.designsystems.one/what-is-a-design-system): The definitive answer — definition, the five layers (tokens, components, patterns, guidelines, governance), design system vs style guide vs component library, best examples, and how to build one in 90 days.
+
+## APIs
+
+- [List design systems](https://www.designsystems.one/api/design-systems): JSON listing of every rich-breakdown system with slug, name, company, tagline, and breakdown URL.
+- [Get system breakdown](https://www.designsystems.one/api/design-systems/{slug}): Full rich-breakdown JSON for one system — origin, governance, known-for, watch-outs, evaluation guidance, anchor components, token snapshot, external links.
+- [Agent-Ready Design Systems Index (JSON)](https://www.designsystems.one/api/ai-ready/systems): Full dataset for the independent AI-readiness benchmark — 37 systems scored against five signals (MCP, llms.txt, DTCG, registry, Code Connect) with per-signal evidence URLs, audit date, and next-audit date. CC BY 4.0.
+- [Agent-Ready Design Systems Index (CSV)](https://www.designsystems.one/api/ai-ready/systems.csv): Same dataset as a spreadsheet-friendly CSV.
+- [MCP server](https://www.designsystems.one/api/mcp): Model Context Protocol endpoint (Streamable HTTP, JSON-RPC 2.0, no auth, also at /mcp) exposing everything above as agent tools — gallery search with engineering-facet filters, full breakdowns, side-by-side comparison, patterns, playbook, glossary, the DTCG token generator, the shadcn registry, design.md generation, the ten SKILL.md files, the Agent-Ready Index, and an agent-readiness audit of any docs site — plus prompts and resources. Register: `claude mcp add designsystems --transport http https://www.designsystems.one/api/mcp`. GET the endpoint for a discovery document.
+- [Glossary](https://www.designsystems.one/api/glossary): JSON list of design-system terms with plain-language definitions.
+- [Token generator](https://www.designsystems.one/api/tokens): Generate a complete TokenSet from a primary color and harmony. Pass `&format=css|css-oklch|tailwind4|tailwind3|scss|ts|js|json|w3c|style-dictionary|tokens-studio` to get formatted exports. URL params match the generator UI: `p` (primary hex), `h` (harmony), `tr` (type ratio), `rs` (radius), `sh` (shadow), `d` (density), `cm` (color mode).
+
+## Component registry (shadcn-spec)
+
+- [Registry index](https://www.designsystems.one/r): shadcn-compatible component registry. Install with `npx shadcn@latest add https://www.designsystems.one/r/{name}`. Items: `utils`, `button`, `input`, `card`.
+
+## AI-ready pillar pages
+
+How designsystems.one ships tokens, components, and MCP servers so Cursor, Claude Code, and v0 can consume them without drift.
+
+- [AI-ready landing](https://www.designsystems.one/ai-ready): The three pillars — machine-readable tokens, MCP servers, and component contracts agents can actually use.
+- [Design system skills for AI agents](https://www.designsystems.one/ai-ready/skills): Ten portable SKILL.md files for design-system work with Claude, Figma Make and Copilot — using components, applying tokens, auditing conformance, semantic accessibility, deprecated-API migration, Figma Code Connect, drift review and authoring agent docs. Each targets a measured failure mode, is mapped to one of six practitioner personas, and is validated against the Agent Skills spec in CI. CC0, no email.
+- [Agent files for design systems](https://www.designsystems.one/ai-ready/agent-files): What Cursor, Claude Code and Copilot actually read, in what order, and what each file costs per turn. AGENTS.md, CLAUDE.md, .cursor/rules, copilot-instructions, SKILL.md, llms.txt and DESIGN.md compared on governance, composition and scoping. Nine ready-to-fill templates, CC0, no email required.
+- [How to structure your design system for AI](https://www.designsystems.one/ai-ready/structure): Step-by-step visual guide (six steps, one diagram each) — layer your tokens, name by intent, author the W3C format, generate from one source, write LLM-readable docs (llms.txt + folder READMEs + MDX), and lock it in CI. The end-to-end map for tokens, naming, and LLM-readable docs.
+- [Tokens for agents](https://www.designsystems.one/ai-ready/tokens): W3C Design Tokens spec ($value / $type / $description), semantic naming, migration plan from hex literals.
+- [MCP setup walkthrough](https://www.designsystems.one/ai-ready/mcp): What MCP is, the reference implementation, wire-up configs for Claude Code / Cursor / Cline.
+- [Components for agents](https://www.designsystems.one/ai-ready/components): Discriminated-union props, the shadcn-registry pattern, MDX docs agents can read.
+- [Agent-Ready Design Systems Index](https://www.designsystems.one/ai-ready/systems): Independent audit of every system in our gallery against five concrete signals — MCP server, llms.txt, DTCG tokens, shadcn-style component registry, Figma Code Connect. First-party evidence only. Re-audited quarterly.
+- [What changed](https://www.designsystems.one/ai-ready/changes): Audit-over-audit deltas in the Index — which systems shipped or retracted signals each quarter.
+
+## Cross-system patterns
+
+A horizontal cut through the rich breakdowns. Each pattern names a recurring product UI problem and points to three to four canonical systems that document a serious answer to it.
+
+- [Patterns landing](https://www.designsystems.one/design-systems/patterns): All cross-system patterns.
+- [Data tables](https://www.designsystems.one/design-systems/patterns/data-tables): Polaris IndexTable, Carbon DataTable, Stripe Dashboard, eBay grid.
+- [Forms](https://www.designsystems.one/design-systems/patterns/forms): Polaris FormLayout, Stripe AmountInput, GOV.UK form patterns, Mailchimp Campaign Builder.
+- [Confirmations & destructive actions](https://www.designsystems.one/design-systems/patterns/confirmations): Stripe ConfirmDialog, Polaris Banner/Modal, Apple HIG Sheet.
+- [Empty states](https://www.designsystems.one/design-systems/patterns/empty-states): Mailchimp Empty State Library, Polaris EmptyState, Pinterest Gestalt Module.
+- [Navigation](https://www.designsystems.one/design-systems/patterns/navigation): Apple HIG Tab Bar, Atlassian Side Navigation, BBC GEL Orbit, Pinterest Gestalt.
+- [Voice & content](https://www.designsystems.one/design-systems/patterns/voice-and-content): Mailchimp Content Style Guide, Polaris voice & tone, GOV.UK plain English.
+- [Search & command palette](https://www.designsystems.one/design-systems/patterns/search-and-command): Vercel Geist Command Bar, shadcn Command, Atlassian Quick Find.
+- [Filters & refinement](https://www.designsystems.one/design-systems/patterns/filters-and-refinement): eBay FilterDrawer, Polaris Filters, Atlassian Filtered Search, GitLab token search.
+- [Dashboards & data viz](https://www.designsystems.one/design-systems/patterns/dashboards): Carbon Charts, Stripe Dashboard, Vercel deployment metrics, PatternFly Charts.
+- [Dark mode handling](https://www.designsystems.one/design-systems/patterns/dark-mode): Carbon themes, Primer color modes, Radix Colors, Geist dark-first surfaces.
+- [Motion vocabulary](https://www.designsystems.one/design-systems/patterns/motion-vocabulary): Apple HIG spring physics, Carbon motion tokens, Material motion system, Polaris motion tokens.
+- [Focus management](https://www.designsystems.one/design-systems/patterns/focus-management): GOV.UK focus state, USWDS skip-link, Radix focus primitives, NHS keyboard expectations.
+
+## Component cross-reference
+
+- [Component index](https://www.designsystems.one/design-systems/components): The same components, every system's answer — data tables, forms, modals, command palettes, and more. One page per component listing every system with a documented take, its own name for it (IndexTable vs DataGrid vs DataTable), and an editorial note.
+
+## Compare design systems
+
+- [Compare two or three systems side-by-side](https://www.designsystems.one/design-systems/compare): Pick from the gallery, see colors / typography / governance / components compared. Shareable URL.
+
+## Playbook — Build a design system
+
+Eight-chapter practitioner playbook on building a design system from zero. Practitioner voice, opinionated, links to canonical examples instead of abstract theory.
+
+- [Playbook landing](https://www.designsystems.one/playbook): Table of contents.
+- [01 — Should you build one](https://www.designsystems.one/playbook/should-you-build-one): The three-surface test, when to hold off, when to invest.
+- [02 — Foundations first](https://www.designsystems.one/playbook/foundations-first): Color, typography, spacing, motion before a single component.
+- [03 — Tokens, not values](https://www.designsystems.one/playbook/tokens-not-values): The three-layer model (primitive / semantic / component) and the W3C Design Tokens spec.
+- [04 — Components: the right ten](https://www.designsystems.one/playbook/components-the-right-ten): What to build first; SaaS vs consumer baselines; API design styles.
+- [05 — Patterns and composition](https://www.designsystems.one/playbook/patterns-and-composition): The layer above components where systems actually differentiate.
+- [06 — Distribution and adoption](https://www.designsystems.one/playbook/distribution-and-adoption): npm vs registry; semver discipline; adoption funnel; forcing functions.
+- [07 — Governance: who owns what](https://www.designsystems.one/playbook/governance): Centralized vs federated vs open; RFC discipline; deprecation policy; funding.
+- [08 — Measuring and proving value](https://www.designsystems.one/playbook/measuring-value): Metrics that move the funding conversation vs dashboard-decoration.
+
+### Migrate to a design system (5-chapter track)
+
+- [Migrate landing](https://www.designsystems.one/playbook/migrate)
+- [01 — Audit the surface area](https://www.designsystems.one/playbook/migrate/audit-the-surface-area)
+- [02 — Build a token bridge](https://www.designsystems.one/playbook/migrate/build-a-token-bridge)
+- [03 — Componentize the right things first](https://www.designsystems.one/playbook/migrate/componentize-the-right-things-first)
+- [04 — The engineering migration path](https://www.designsystems.one/playbook/migrate/engineering-migration-path)
+- [05 — Adopt and enforce](https://www.designsystems.one/playbook/migrate/adopt-and-enforce)
+
+## Tools
+
+- [Token Generator](https://www.designsystems.one/tools/token-generator): OKLCH-based 11-step color scales, APCA + WCAG dual contrast scoring, type/spacing/radius/shadow tokens, eleven export formats (CSS, CSS-OKLCH, Tailwind v4 / v3, SCSS, TS, JS, JSON, W3C DTCG 2025.10, Style Dictionary, Tokens Studio). Pair finder, named brand kits, shareable URL state. Send the kit into the accessibility-checklist via one click.
+- [Accessibility Checklist](https://www.designsystems.one/tools/accessibility-checklist): WCAG 2.1 audit checklist with category grouping plus an in-page contrast tester. Accepts kits from the token generator.
+- [Grid Builder](https://www.designsystems.one/tools/grid-builder): Compose responsive grid layouts visually.
+- [ROI Calculator](https://www.designsystems.one/tools/roi-calculator): Quantify gains in design speed, dev speed, quality, and onboarding when adopting a design system.
+- [Token Diff](https://www.designsystems.one/tools/token-diff): Compare two token-generator kits side-by-side. Paste two share URLs or query strings; see exactly what changed across colors, type, spacing, shape, motion. Useful for proposing rebrands or auditing migrations.
+- [Release Checker](https://www.designsystems.one/tools/release-checker): Validate a design-system release for SemVer correctness, breaking-change detection, and release notes.
+
+## Rich design system breakdowns
+The design systems library (gallery) at /design-systems contains 120 real-world design systems. The 49 listed below ship with full editorial breakdowns; the complete library list is at /api/design-systems.
+
+- [Polaris (Shopify)](https://www.designsystems.one/design-systems/polaris)
+- [Carbon (IBM)](https://www.designsystems.one/design-systems/carbon-design)
+- [Material Design (Google)](https://www.designsystems.one/design-systems/material-design)
+- [Apple Human Interface Guidelines](https://www.designsystems.one/design-systems/apple-hig)
+- [Atlassian Design System](https://www.designsystems.one/design-systems/atlassian-design)
+- [Lightning Design System (Salesforce)](https://www.designsystems.one/design-systems/lightning-design)
+- [Spectrum (Adobe)](https://www.designsystems.one/design-systems/spectrum)
+- [Fluent Design (Microsoft)](https://www.designsystems.one/design-systems/fluent-design)
+- [Primer (GitHub)](https://www.designsystems.one/design-systems/primer)
+- [Cloudscape (AWS / Amazon)](https://www.designsystems.one/design-systems/amazon-design)
+- [GOV.UK Design System](https://www.designsystems.one/design-systems/gov-uk-design)
+- [USWDS (US Web Design System)](https://www.designsystems.one/design-systems/usds-design)
+- [BBC GEL](https://www.designsystems.one/design-systems/bbc-gel)
+- [Mailchimp Design System](https://www.designsystems.one/design-systems/mailchimp-design)
+- [Pinterest Gestalt](https://www.designsystems.one/design-systems/gestalt)
+- [Stripe Design System](https://www.designsystems.one/design-systems/stripe-design)
+- [Dropbox Design](https://www.designsystems.one/design-systems/dropbox-design)
+- [Airbnb DLS](https://www.designsystems.one/design-systems/airbnb-design)
+- [eBay Evo](https://www.designsystems.one/design-systems/ebay-design)
+- [Audi UI](https://www.designsystems.one/design-systems/audi-ui)
+- [shadcn/ui](https://www.designsystems.one/design-systems/shadcn-ui)
+- [Radix UI](https://www.designsystems.one/design-systems/radix-ui)
+- [Mantine](https://www.designsystems.one/design-systems/mantine)
+- [Tailwind UI](https://www.designsystems.one/design-systems/tailwind-ui)
+- [Ant Design](https://www.designsystems.one/design-systems/ant-design)
+- [Material UI (MUI)](https://www.designsystems.one/design-systems/mui)
+- [Chakra UI](https://www.designsystems.one/design-systems/chakra-ui)
+- [Paste (Twilio)](https://www.designsystems.one/design-systems/paste)
+- [Geist (Vercel)](https://www.designsystems.one/design-systems/vercel-geist)
+- [Helios (HashiCorp)](https://www.designsystems.one/design-systems/hashicorp-helios)
+- [Linear](https://www.designsystems.one/design-systems/linear)
+- [PatternFly (Red Hat)](https://www.designsystems.one/design-systems/redhat-patternfly)
+- [Backpack (Skyscanner)](https://www.designsystems.one/design-systems/skyscanner-backpack)
+- [Pajamas (GitLab)](https://www.designsystems.one/design-systems/gitlab-pajamas)
+- [Canvas (Workday)](https://www.designsystems.one/design-systems/workday-canvas)
+- [NHS Design System](https://www.designsystems.one/design-systems/nhs-design)
+- [Market (Square / Block)](https://www.designsystems.one/design-systems/square-design)
+- [LeafyGreen UI (MongoDB)](https://www.designsystems.one/design-systems/mongodb-leafygreen)
+- [Kumo (Cloudflare)](https://www.designsystems.one/design-systems/cloudflare-kumo)
+- [Redwood (Oracle)](https://www.designsystems.one/design-systems/oracle-redwood)
+- [Scale (Deutsche Telekom)](https://www.designsystems.one/design-systems/telekom-scale)
+- [Designsystemet (Norway)](https://www.designsystems.one/design-systems/norway-designsystemet)
+- [DKFDS (Denmark)](https://www.designsystems.one/design-systems/denmark-dkfds)
+- [NL Design System (Netherlands)](https://www.designsystems.one/design-systems/nl-design-system)
+- [New Zealand Government Design System](https://www.designsystems.one/design-systems/nz-design-system)
+- [Spindle (CyberAgent)](https://www.designsystems.one/design-systems/cyberagent-spindle)
+- [TDesign (Tencent)](https://www.designsystems.one/design-systems/tencent-tdesign)
+- [Shoreline (VTEX)](https://www.designsystems.one/design-systems/vtex-shoreline)
+- [Poncho (Government of Argentina)](https://www.designsystems.one/design-systems/argentina-poncho)
+
+## Foundations
+
+- [Principles](https://www.designsystems.one/foundations/principles)
+- [Color](https://www.designsystems.one/foundations/color)
+- [Typography](https://www.designsystems.one/foundations/typography)
+- [Spacing](https://www.designsystems.one/foundations/spacing)
+- [Layout](https://www.designsystems.one/foundations/layout)
+- [Motion](https://www.designsystems.one/foundations/motion)
+- [Duration & easing](https://www.designsystems.one/foundations/duration-and-easing)
+- [Accessibility](https://www.designsystems.one/foundations/accessibility)
+- [Voice & tone](https://www.designsystems.one/foundations/voice-and-tone)
+- [Naming conventions](https://www.designsystems.one/foundations/naming-conventions)
+- [Maturity model](https://www.designsystems.one/foundations/maturity-model)
+
+## Reference
+
+- [Glossary](https://www.designsystems.one/glossary): Plain-language definitions for the terms that show up in every design-system conversation.
+- [Frameworks](https://www.designsystems.one/frameworks): Frameworks and models for organizing, implementing, and governing design systems.
+
