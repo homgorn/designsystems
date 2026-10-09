@@ -1,0 +1,7 @@
+MIT License — код (`engine/`, `scripts/`, `adapters/`, `modules/`, `tests/`).
+
+Данные корпуса (`db/`, `research/raw/`, индекс Agent-Ready) — CC BY 4.0,
+© DesignSystems.one (2026): https://www.designsystems.one/ai-ready/systems.
+Каждый экспорт движка обязан содержать эту атрибуцию (FR-10, AC-11).
+
+Copyright (c) 2026 susa-forge
