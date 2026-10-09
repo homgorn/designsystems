@@ -6,13 +6,13 @@
 
 ## Chunk 0. Фундамент проф. разработки (P0)
 
-- [ ] Git: `git init`, первый коммит baseline (проверено 09.10: **НЕ git-репо** ❌)
-- [x] `pyproject.toml`, `.env.example`, `.gitignore` (09.10); нет `requirements.txt` — не нужен (есть pyproject)
-- [x] `Makefile`, CI `.github/workflows/ci.yml` (файл есть; CI не бегал — нет репо); нет pre-commit-конфига
-- [x] `tests/`: test_corpus (AC-1/2) + test_checks_exports (AC-3–6/9/11, EC-6, xfail AC-7/8/10) — **8 passed, 1 skipped, 3 xfailed (09.10) ✅**
-- [~] `AGENTS.md` ✅; нет: CONTRIBUTING, PR/issue-шаблоны, CHANGELOG, LICENSE, docs/adr, docs/runbook.md
-- [x] Конфиг + error-коды (`engine/config.py`, `DS-E###` с hint) ✅
-- [ ] Фикс «22 tools» → 23 в `monetization_surfaces`
+- [x] Git: baseline `8e45666` + 3 коммита, дерево чистое (09.10) ✅
+- [x] `pyproject.toml`, `.env.example`, `.gitignore` (+*.bak*), pre-commit-конфиг, CI-файл ✅
+- [x] `tests/`: **16 passed, 1 skipped, 3 xfailed; покрытие engine 90% (NFR-3 ✅)** (09.10)
+- [x] Линт: 16 ошибок ruff → 0; format применён ✅
+- [x] `AGENTS.md`, CONTRIBUTING, CHANGELOG (0.1.1), LICENSE, docs/adr ×2, docs/runbook.md ✅ (NFR-4 ✅)
+- [x] Конфиг + error-коды ✅ · Фикс «22→23» ✅ (бэкап `.bak-22to23`, `scripts/fix_22to23.py`)
+- [x] Найден и исправлен баг тестом: evidence терял причину пробы ✅
 
 ## Chunk 1. Анализ рынка скиллом (teardown-lite) — агент R1
 
@@ -30,7 +30,7 @@
 - [x] `specs/003-engine/spec.md` написана (мной, 08.10)
 - [x] S1-валидация: субагент rate-limited → вручную: score 76 → фиксы (AC-11, EC-6, xfail AC-7/8/10) → **84/100 ✅**, pytest 8 passed + 1 skipped + 3 xfailed
 - [ ] Твой апрув спеки → разблокирует Chunk 4 (E1)
-- [ ] Открыто к релизу: NFR-3 (coverage ≥80%), NFR-4 (`docs/runbook.md`)
+- [x] Открыто к релизу было: NFR-3 ✅ (90%), NFR-4 ✅ (runbook) — закрыты 09.10, остался твой апрув
 
 ## Chunk 4. Ядро движка (реализовано мной 08.10, ждёт ревью — не агента)
 
