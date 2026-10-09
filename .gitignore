@@ -4,6 +4,7 @@ __pycache__/
 .env
 *.db-wal
 *.db-shm
+*.bak*
 .pytest_cache/
 .ruff_cache/
 tool-output/

@@ -36,7 +36,7 @@ def check(url: str, repo: str | None = None) -> dict:
                 ev = f"{c} ({ev})"
                 break
         else:
-            ev = f"not found: {candidates[0]}"
+            ev = f"not found ({ev})"  # ev хранит последнюю причину пробы, напр. unreachable
         checks.append(
             {
                 "signal": signal,
