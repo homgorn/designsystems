@@ -5,6 +5,13 @@ description = "Agent-Ready engine: corpus -> index -> checks -> exports (designs
 requires-python = ">=3.11"
 dependencies = []  # core — stdlib only; `mcp` — extra для engine/mcp_server.py
 
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["engine*"]  # только шиппабельное ядро; adapters/modules/tests — из исходников
+
 [project.optional-dependencies]
 mcp = ["mcp>=1.0"]
 dev = ["pytest>=8", "ruff>=0.4"]
