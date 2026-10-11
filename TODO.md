@@ -6,6 +6,9 @@
 
 ## Chunk 0. Фундамент проф. разработки (P0)
 
+- [x] GitHub: `homgorn/designsystems` (public), ветка main, 8 топиков, push чистый (09→11.10) ✅
+- [x] CI-файл + фикс editable-install (верифицирован в чистом venv) ✅; ⚠️ Actions блокированы биллингом аккаунта (10/10, verbatim) — чинится владельцем, не кодом
+
 - [x] Git: baseline `8e45666` + 3 коммита, дерево чистое (09.10) ✅
 - [x] `pyproject.toml`, `.env.example`, `.gitignore` (+*.bak*), pre-commit-конфиг, CI-файл ✅
 - [x] `tests/`: **16 passed, 1 skipped, 3 xfailed; покрытие engine 90% (NFR-3 ✅)** (09.10)
